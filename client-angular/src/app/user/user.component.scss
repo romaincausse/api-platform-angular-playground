@@ -1,0 +1,22 @@
+table {
+  width: 100%;
+}
+
+mat-footer-row,
+mat-header-row,
+mat-row {
+  justify-content: space-between;
+}
+
+td.mat-cell,
+td.mat-footer-cell,
+th.mat-header-cell {
+  flex: 1 1;
+  border-bottom-style: hidden;
+}
+
+.mat-fab {
+  position: fixed;
+  bottom: 2.5rem;
+  right: 2.5rem;
+}

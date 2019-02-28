@@ -1,0 +1,36 @@
+<mat-card>
+  <form [formGroup]="missionForm" (ngSubmit)="onSaveMission()" class="form-container">
+    <h2><span *ngIf="id != -1 ">Mettre à jour</span><span *ngIf="id == -1 ">Créer</span> une mission</h2>
+    <mat-form-field>
+      <input matInput placeholder="Title" formControlName="title">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Acronyme" formControlName="acronyme">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Color" formControlName="color">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Description" formControlName="description">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="StartDate" formControlName="startDate">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput [matDatepicker]="picker" placeholder="Due date" formControlName="dueDate">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" [disabled]="missionForm.invalid">Enregistrer</button>
+  </form>
+
+  <div class="right-content margin-top">
+    <button *ngIf="id != -1 " (click)="delete()" mat-icon-button color="warn">
+      <mat-icon aria-label="Delete">delete</mat-icon>
+    </button>
+  </div>
+  <app-goback></app-goback>
+
+ 
+</mat-card>

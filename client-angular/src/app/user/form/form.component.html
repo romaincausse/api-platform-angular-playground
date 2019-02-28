@@ -1,0 +1,26 @@
+<mat-card>
+  <form [formGroup]="userForm" (ngSubmit)="onSave()" class="form-container">
+    <h2><span *ngIf="id != -1 ">Mettre à jour</span><span *ngIf="id == -1 ">Créer</span> un utilisateur</h2>
+    <mat-form-field>
+      <input matInput placeholder="UserName" formControlName="username">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Email" formControlName="email">
+    </mat-form-field>
+    <!-- <mat-form-field>
+        <input matInput placeholder="Rôle" formControlName="role">
+      </mat-form-field> -->
+    <mat-checkbox matInput formControlName="is_admin">Admin</mat-checkbox>
+    
+    <button mat-raised-button color="primary" [disabled]="userForm.invalid">Enregistrer</button>
+  </form>
+
+  <div class="right-content margin-top">
+    <button *ngIf="id != -1 " (click)="delete()" mat-icon-button color="warn">
+      <mat-icon aria-label="Delete">delete</mat-icon>
+    </button>
+  </div>
+  <app-goback></app-goback>
+
+
+</mat-card>

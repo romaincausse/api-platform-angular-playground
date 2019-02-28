@@ -1,0 +1,24 @@
+<h2>Users</h2>
+<table mat-table [dataSource]="users" class="mat-elevation-z8">
+
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef> id </th>
+      <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+    </ng-container>
+  
+    <ng-container matColumnDef="username">
+        <th mat-header-cell *matHeaderCellDef> username </th>
+        <td mat-cell *matCellDef="let element"> {{element.username}} </td>
+      </ng-container>
+  
+    <ng-container matColumnDef="email">
+      <th mat-header-cell *matHeaderCellDef> email </th>
+      <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+    </ng-container>
+  
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row (click)="update(row.id)" matRipple *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  
+  </table>
+  <button mat-fab (click)="create()"><mat-icon>add</mat-icon></button>
+  
