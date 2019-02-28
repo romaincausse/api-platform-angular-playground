@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
+import { Observable } from 'rxjs'
 
 import { API_URL, BASE_URL } from '../app.constants';
 
@@ -41,13 +42,18 @@ export class AuthService {
     }
   }
 
-  logout() {
-    sessionStorage.removeItem(AUTHENTICATED_USER);
-    sessionStorage.removeItem(TOKEN);
+  logout(): Observable<void> {
+    return Observable.create(
+      (observer) => {
+        sessionStorage.removeItem(AUTHENTICATED_USER);
+        sessionStorage.removeItem(TOKEN);
+        observer.next();
+      }
+    )
   }
 
   isUserLoggedIn(): boolean {
-    let user = sessionStorage.getItem(AUTHENTICATED_USER)
+    let user = sessionStorage.getItem(AUTHENTICATED_USER);
     return !(user === null);
   }
 

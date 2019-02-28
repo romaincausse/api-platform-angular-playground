@@ -21,11 +21,13 @@
       </button>
       <span>client-angular</span>
       <span class="spacer"></span>
-      <a mat-list-item href="#">
+      <mat-menu #menu="matMenu">
+          <button *ngIf="!auth.isUserLoggedIn()" mat-menu-item routerLink="/login">Login</button>
+          <button *ngIf="auth.isUserLoggedIn()" mat-menu-item routerLink="/logout">Logout</button>
+      </mat-menu>
+      <a mat-list-item [matMenuTriggerFor]="menu">
         <mat-icon>person</mat-icon>
       </a>
-      <a mat-list-item href="#">Link 2</a>
-      <a mat-list-item href="#">Link 3</a>
     </mat-toolbar>
     <ng-content></ng-content>
   </mat-sidenav-content>
