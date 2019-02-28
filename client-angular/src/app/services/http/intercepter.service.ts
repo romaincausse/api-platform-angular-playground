@@ -1,19 +1,31 @@
 import { Injectable } from '@angular/core';
 import { HttpInterceptor, HttpHandler, HttpRequest } from '@angular/common/http';
+import { AuthService } from '../auth.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class IntercepterService implements HttpInterceptor{
 
-  constructor() {
+  constructor(
+    private authService: AuthService
+  ) {
    }
 
   intercept(req: HttpRequest<any>, next: HttpHandler) {
-    // @todo: add Auth
+    let authHeaderString = this.authService.getAuthenticatedToken();
+    let username = this.authService.getAuthenticatedUser();
+    
+    let headers: any = {};
+    headers['Accept'] = "application/json"
+    
+    if(authHeaderString && username) {
+      headers['Authorization'] = authHeaderString
+    }
+
     req = req.clone({
       setHeaders: {
-        Accept: "application/json"
+        ...headers
       }
     })
     return next.handle(req)

@@ -11,7 +11,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class FormComponent implements OnInit {
 
-  userForm: FormGroup
+  userForm: FormGroup;
   id: number = null;
   user: User
 

@@ -7,10 +7,14 @@ import { UserComponent } from './user/user.component';
 import { MissionComponent } from './mission/mission.component';
 import { FormComponent as MissionFormComponent } from './mission/form/form.component';
 import { FormComponent as UserFormComponent } from './user/form/form.component';
+import { LoginComponent } from './user/login/login.component';
+import { LogoutComponent } from './user/logout/logout.component';
 
 const routes: Routes = [
   { path: "", component: HomeComponent },
   { path: "greating", component: GreatingComponent },
+  { path: "login", component: LoginComponent },
+  { path: "logout", component: LogoutComponent },
   { path: "user", children:[
     {path: "", component: UserComponent},
     {path: ":id", component: UserFormComponent}
