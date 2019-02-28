@@ -31,6 +31,14 @@ class User implements UserInterface
     /**
      * @ORM\Column(name="is_active", type="boolean")
      */
+
+     /**
+     * @var Assignement[] Available assignments for this user.
+     *
+     * @ORM\OneToMany(targetEntity="Assignment", mappedBy="user")
+     */
+    public $assignments;
+
     private $isActive;
     public function __construct($username)
     {
