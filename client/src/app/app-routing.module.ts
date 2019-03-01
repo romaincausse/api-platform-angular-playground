@@ -9,6 +9,8 @@ import { FormComponent as MissionFormComponent } from './mission/form/form.compo
 import { FormComponent as UserFormComponent } from './user/form/form.component';
 import { LoginComponent } from './user/login/login.component';
 import { LogoutComponent } from './user/logout/logout.component';
+import { RouteGuardServiceAdmin } from './services/guard/route-guard-admin.service';
+import { RouteGuardServiceUser } from './services/guard/route-guard-user.service';
 
 const routes: Routes = [
   { path: "", component: HomeComponent },
@@ -19,9 +21,9 @@ const routes: Routes = [
     {path: "", component: UserComponent},
     {path: ":id", component: UserFormComponent}
   ]},
-  { path: "mission", children:[
+  { path: "mission", canActivate: [RouteGuardServiceUser] ,children:[
     {path: "", component: MissionComponent},
-    {path: ":id", component: MissionFormComponent}
+    {path: ":id", component: MissionFormComponent, canActivate: [RouteGuardServiceAdmin]}
   ]},
   // { path: "logout", component: LogoutComponent },
   // { path: "welcome/:name", component: WelcomeComponent, canActivate: [RouteGuardService] },

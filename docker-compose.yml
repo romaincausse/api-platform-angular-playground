@@ -70,14 +70,12 @@ services:
 
   client:
     # Use a static website hosting service in production
-    # See https://github.com/facebookincubator/create-react-app/blob/master/packages/react-scripts/template/README.md#deployment
-    image: ${CONTAINER_REGISTRY_BASE}/client
+    # Angular-Client
+    image: client
     build:
       context: ./client
       cache_from:
-        - ${CONTAINER_REGISTRY_BASE}/client
-    env_file:
-      - ./client/.env
+        - client
     volumes:
       - ./client:/usr/src/client:rw,cached
       - /usr/src/client/node_modules
