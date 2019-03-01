@@ -17,14 +17,20 @@ ng serve
 Swagger
 http://localhost:8080/docs
 
+Adminer
+http://localhost:8090
+
 API
 http://localhost:8080/api
 
 # Commandes
 
+
 ## JWT
 create an user:
-curl -X POST http://localhost:8080/register -d _username=[EMAIL] -d _password=[PASSWORD]
+```
+curl -X POST http://localhost:8080/register -d '{"_username":"[EMAIL]", "_password":"[PASSWORD]"}' -H 'Content-Type: application/json'
+```
 
 Login and get token
 ```

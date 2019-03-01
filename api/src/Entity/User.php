@@ -29,8 +29,15 @@ class User implements UserInterface
      */
     private $password;
     /**
-     * @ORM\Column(name="is_active", type="boolean")
+     * @ORM\Column(name="is_active", type="boolean", options={"default":true})
      */
+    private $isActive;
+
+    /**
+     * @var ArrayCollection
+     * @ORM\Column(name="roles", type="array")
+     */
+    private $roles = array();
 
      /**
      * @var Assignement[] Available assignments for this user.
@@ -39,7 +46,9 @@ class User implements UserInterface
      */
     public $assignments;
 
-    private $isActive;
+    // private $roles
+
+    
     public function __construct($username)
     {
         $this->isActive = true;
@@ -71,7 +80,15 @@ class User implements UserInterface
     }
     public function getRoles()
     {
-        return array('ROLE_USER');
+        if (empty($this->roles)) {
+            return ['ROLE_USER'];
+        }
+        return $this->roles;
+    }
+
+    public function setRoles($roles)
+    {
+        $this->roles = $roles;
     }
     public function eraseCredentials()
     {
