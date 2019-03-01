@@ -8,9 +8,11 @@
         <mat-icon>home</mat-icon>Home
       </a>
       <mat-divider></mat-divider>
-      <mat-toolbar>Admin</mat-toolbar>
-      <a mat-list-item routerLink="/mission">Missions</a>
-      <a mat-list-item routerLink="/user">Users</a>
+      <div *ngIf="auth.isUserAdmin()">
+        <mat-toolbar>Admin</mat-toolbar>
+        <a mat-list-item routerLink="/mission">Missions</a>
+        <a mat-list-item routerLink="/user">Users</a>
+      </div>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
@@ -22,8 +24,8 @@
       <span>client-angular</span>
       <span class="spacer"></span>
       <mat-menu #menu="matMenu">
-          <button *ngIf="!auth.isUserLoggedIn()" mat-menu-item routerLink="/login">Login</button>
-          <button *ngIf="auth.isUserLoggedIn()" mat-menu-item routerLink="/logout">Logout</button>
+        <button *ngIf="!auth.isUserLoggedIn()" mat-menu-item routerLink="/login">Login</button>
+        <button *ngIf="auth.isUserLoggedIn()" mat-menu-item routerLink="/logout">Logout</button>
       </mat-menu>
       <a mat-list-item [matMenuTriggerFor]="menu">
         <mat-icon>person</mat-icon>

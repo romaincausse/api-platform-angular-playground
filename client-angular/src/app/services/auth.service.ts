@@ -5,8 +5,11 @@ import { Observable } from 'rxjs'
 
 import { API_URL, BASE_URL } from '../app.constants';
 
-export const TOKEN = 'token'
-export const AUTHENTICATED_USER = "authenticadedUser"
+export const TOKEN = 'token';
+export const AUTHENTICATED_USER = "authenticadedUser";
+export const AUTHENTICATED_ADMIN_USER = "authenticadedAdminUser";
+export const ROLE_USER = "ROLE_USER";
+export const ROLE_ADMIN = "ROLE_ADMIN";
 
 @Injectable({
   providedIn: 'root'
@@ -26,6 +29,13 @@ export class AuthService {
           data => {
             sessionStorage.setItem(AUTHENTICATED_USER, email)
             sessionStorage.setItem(TOKEN, `Bearer ${data.token}`)
+
+            let roles = data.data ? data.data.roles : [ROLE_USER];
+
+            // Only for display and Routes Guards
+            if(roles.indexOf(ROLE_ADMIN) > -1) {
+              sessionStorage.setItem(AUTHENTICATED_ADMIN_USER, "1");
+            }
             return data
           }
         )
@@ -47,14 +57,21 @@ export class AuthService {
       (observer) => {
         sessionStorage.removeItem(AUTHENTICATED_USER);
         sessionStorage.removeItem(TOKEN);
+        sessionStorage.removeItem(AUTHENTICATED_ADMIN_USER);
         observer.next();
       }
     )
   }
 
   isUserLoggedIn(): boolean {
+    
     let user = sessionStorage.getItem(AUTHENTICATED_USER);
     return !(user === null);
+  }
+
+  isUserAdmin(): boolean {
+    let isAdmin = sessionStorage.getItem(AUTHENTICATED_ADMIN_USER);
+    return !(isAdmin === null);
   }
 
 }
